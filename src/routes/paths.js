@@ -3,6 +3,8 @@ import { Dashboard } from "../pages/Dashboard";
 import { PageNotFound } from "../pages/PageNotFound";
 import { Login } from "../pages/Login";
 import { ManageUser } from "../pages/ManageUser";
+import { ManageAdmin } from "../pages/ManageAdmin";
+import { InsertExcel } from "../pages/InsertExcel";
 
 export const paths = [
     {
@@ -18,6 +20,22 @@ export const paths = [
       element: (
         <ProtectedRoute>
           <ManageUser />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/manage-admin",
+      element: (
+        <ProtectedRoute>
+          <ManageAdmin />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/insert-excel",
+      element: (
+        <ProtectedRoute>
+          <InsertExcel />
         </ProtectedRoute>
       ),
     },

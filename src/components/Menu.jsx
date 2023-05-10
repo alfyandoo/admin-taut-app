@@ -12,6 +12,10 @@ export const Menu = () => {
       href: "/",
     },
     {
+      title: "List Admin",
+      href: "/manage-admin",
+    },
+    {
       title: "List User",
       href: "/manage-user",
     },
