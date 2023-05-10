@@ -26,7 +26,7 @@ export const Menu = () => {
   ];
 
   const Logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("token-admin");
     setAuth(null);
     window.location.href = "/login";
   };

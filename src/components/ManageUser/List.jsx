@@ -60,7 +60,7 @@ export const List = ({ data, getAllUser }) => {
               </td>
               <td className="p-5 align-top">
                 <p className="text-xs 2xl:text-sm font-normal text-psl-black-100 text-center">
-                  {item.phone}
+                  {item.phone_number}
                 </p>
               </td>
               <td className="p-5 align-top">
