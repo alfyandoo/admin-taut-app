@@ -26,12 +26,9 @@ export const List = ({ data, getAllAdmin }) => {
               Username
             </th>
             <th className="py-3 px-5 h-11 w-[100px] text-center text-xs 2xl:text-sm font-bold">
-              Phone
-            </th>
-            <th className="py-3 px-5 h-11 w-[100px] text-center text-xs 2xl:text-sm font-bold">
               Created At
             </th>
-            <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold"></th>
+            <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -44,15 +41,10 @@ export const List = ({ data, getAllAdmin }) => {
               </td>
               <td className="p-5 align-top">
                 <p className="text-xs 2xl:text-sm font-normal text-psl-black-100 text-center">
-                  {item.phone}
-                </p>
-              </td>
-              <td className="p-5 align-top">
-                <p className="text-xs 2xl:text-sm font-normal text-psl-black-100 text-center">
                   {showFormattedDate(item.created_at)}
                 </p>
               </td>
-              {/* <td>
+              <td>
                 <div className="flex justify-center">
                   <button
                     className="w-10 h-10 flex items-center justify-center rounded-md text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
@@ -61,7 +53,7 @@ export const List = ({ data, getAllAdmin }) => {
                     <FaTrash />
                   </button>
                 </div>
-              </td> */}
+              </td>
             </tr>
           ))}
         </tbody>

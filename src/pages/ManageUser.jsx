@@ -10,7 +10,6 @@ export const ManageUser = () => {
 
   useEffect(() => {
     getAllUser();
-    console.log(data, );
   }, []);
 
   const getAllUser = async () => {
@@ -25,7 +24,7 @@ export const ManageUser = () => {
       });
 
       const dataJson = await response.json();
-      console.log(dataJson);
+
       setData(dataJson.data);
     } catch (error) {
       throw new Error(`Error: ${error}`);
@@ -40,11 +39,11 @@ export const ManageUser = () => {
       ) : (
         <div className="w-full flex">
           <div className="mx-5">
-            <h1 className="text-center font-bold text-4xl mt-4">
-              List User
-            </h1>
-            <h2 className="font-semibold">Total User: {data?.length}</h2>
-            <List data={data} getAllUser={getAllUser} />
+            <h1 className="text-center font-bold text-4xl mt-4">List User</h1>
+            <div className="mt-20">
+              <h2 className="font-semibold">Total User: {data?.length}</h2>
+              <List data={data} getAllUser={getAllUser} />
+            </div>
           </div>
         </div>
       )}

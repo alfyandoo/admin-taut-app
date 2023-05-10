@@ -32,16 +32,16 @@ export const Menu = () => {
   };
 
   return (
-    <div className="h-screen bg-orange-300">
+    <div className="h-screen bg-gray-300">
       <div className="flex justify-center mb-3">
         <img
-          src="/images/logo-app.png"
+          src="/images/icon-taut.png"
           alt="logo"
-          className="m-2 w-40 h-40 rounded-xl hover:bg-blue-300/30"
+          className="m-2 w-40 mb-24 mt-10 rounded-xl"
         />
       </div>
       {menus.map((item, index) => (
-        <div key={index} className="flex mx-2 mb-3">
+        <div key={index} className="flex mx-5 mb-3">
           <Link
             onClick={() => setActiveMenu(item.title)}
             to={item.href}
@@ -53,7 +53,7 @@ export const Menu = () => {
           </Link>
         </div>
       ))}
-      <div className="m-2 fixed bottom-2">
+      <div className="m-5 fixed bottom-2">
         <button
           className="px-5 py-2 rounded-xl bg-white border text-red-600 border-red-600 hover:text-white hover:bg-red-600"
           onClick={() => Logout()}

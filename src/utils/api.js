@@ -50,7 +50,22 @@ async function insertExcel(formData) {
   link.setAttribute("download", `list-user-output-${Date.now()}.xlsx`);
   document.body.appendChild(link);
   link.click();
-  console.log(blob, "test");
 }
 
-export { putAccessToken, downloadTemplate, insertExcel };
+async function getQrCode(username) {
+  const response = await fetch(
+    `${BASE_URL}/profiles/users/${username}/qrcode`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "image/png",
+      },
+    }
+  );
+
+  const result = await response.blob();
+
+  return { error: false, data: result };
+}
+
+export { putAccessToken, downloadTemplate, insertExcel, getQrCode };

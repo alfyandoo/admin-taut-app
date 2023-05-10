@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../api/api";
-import { List } from "../components/ManageUser/List";
+import { List } from "../components/ManageAdmin/List";
 import { Loading } from "../components/templates/Loading";
 
 export const ManageAdmin = () => {
@@ -10,7 +10,6 @@ export const ManageAdmin = () => {
 
   useEffect(() => {
     getAllAdmin();
-    console.log(data, );
   }, []);
 
   const getAllAdmin = async () => {
@@ -25,7 +24,7 @@ export const ManageAdmin = () => {
       });
 
       const dataJson = await response.json();
-      console.log(dataJson);
+      
       setData(dataJson.data);
     } catch (error) {
       throw new Error(`Error: ${error}`);
@@ -40,11 +39,11 @@ export const ManageAdmin = () => {
       ) : (
         <div className="w-full flex">
           <div className="mx-5">
-            <h1 className="text-center font-bold text-4xl mt-4">
-              List Admin
-            </h1>
-            <h2 className="font-semibold">Total User: {data?.length}</h2>
-            <List data={data} getAllAdmin={getAllAdmin} />
+            <h1 className="text-center font-bold text-4xl mt-4">List Admin</h1>
+            <div className="mt-20">
+              <h2 className="font-semibold">Total Admin: {data?.length}</h2>
+              <List data={data} getAllAdmin={getAllAdmin} />
+            </div>
           </div>
         </div>
       )}

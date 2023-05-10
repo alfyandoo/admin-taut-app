@@ -14,22 +14,20 @@ export const InsertExcel = () => {
   };
 
   const handleInsertExcel = async (file) => {
-    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
     try {
-        await insertExcel(formData);
-        alert("Success");
+      await insertExcel(formData);
+      alert("Success");
     } catch (error) {
-        alert("Failed");
+      alert("Failed");
     }
-
   };
 
   return (
-    <div className="m-10">
-      <div className="flex flex-col">
-        <h1 className="font-bold text-3xl">Insert Data</h1>
+    <div>
+      <h1 className="text-center font-bold text-4xl mt-4">Insert Data</h1>
+      <div className="flex flex-col m-5">
         <div className="mt-10">
           <div className="flex justify-end">
             <button
@@ -44,7 +42,7 @@ export const InsertExcel = () => {
           </div>
           <form
             action=""
-            className="flex flex-col border p-5 rounded-lg mt-5"
+            className="flex flex-col border border-blue-800 p-5 rounded-lg mt-5"
             onSubmit={(event) => {
               event.preventDefault();
               handleInsertExcel(fileExcel);
@@ -52,7 +50,7 @@ export const InsertExcel = () => {
           >
             <input
               type="file"
-              className="border mb-5 rounded-lg p-3"
+              className="border border-blue-800 mb-5 rounded-lg p-3"
               onChange={(event) => onChangeFile(event)}
             />
 
