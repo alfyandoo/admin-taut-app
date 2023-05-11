@@ -18,7 +18,7 @@ export const App = () => {
   return (
     <AuthContext.Provider value={authContextValue}>
       <div className="w-full flex max-h-screen bg-gray-50">
-        <div className="w-1/6">{localStorage.getItem("token-admin") && <Menu />}</div>
+      <div className={window.location.pathname === "/login" ? "" :  "w-1/6"}>{localStorage.getItem("token-admin") && <Menu />}</div>
         <div className="w-5/6">
           <Routes>
             {paths.map((item, index) => (

@@ -51,8 +51,16 @@ export const Login = () => {
 
   return (
     <>
-      <div className="w-full flex flex-col sm:flex-col md:flex-row relative bg-white mx-auto">
-        <div className="flex flex-col justify-start sm:justify-start md:justify-center h-screen">
+      <div className="w-full h-screen flex flex-col justify-center items-center mx-auto">
+        <div className="flex w-full justify-center items-center mx-auto">
+          <img
+            src="/images/icon-taut.png"
+            alt="login_image"
+            className="w-[400px] mt-10 mb-20"
+          />
+        </div>
+
+        <div className="flex flex-col items-center w-full h-fit">
           <h2 className="font-bold mx-auto mb-2">ADMIN</h2>
           <input
             type="text"
@@ -86,18 +94,11 @@ export const Login = () => {
             )}
           </div>
           <button
-            className="my-3 py-3 rounded-lg text-white bg-blue-400 hover:bg-blue-300"
+            className="my-3 px-20 py-3 rounded-lg text-white bg-blue-400 hover:bg-blue-300"
             onClick={() => login()}
           >
             Login
           </button>
-        </div>
-        <div>
-          <img
-            src="/images/ilustration-3.png"
-            alt="login_image"
-            className="w-full h-fit mt-24 hidden sm:hidden md:block"
-          />
         </div>
       </div>
     </>
