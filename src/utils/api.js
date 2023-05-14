@@ -82,7 +82,17 @@ async function getUserById(id) {
   return { error: false, data: result.data };
 }
 
-async function updateUser({ id, password, email, name, job, born_date, phone_number, address, about }) {
+async function updateUser({
+  id,
+  password,
+  email,
+  name,
+  job,
+  born_date,
+  phone_number,
+  address,
+  about,
+}) {
   console.log(id, password);
   const response = await fetchWithToken(`${BASE_URL}/admins/users/${id}`, {
     method: "PUT",
@@ -110,4 +120,36 @@ async function updateUser({ id, password, email, name, job, born_date, phone_num
   return { error: false, messages: result.messages };
 }
 
-export { putAccessToken, downloadTemplate, insertExcel, getQrCode, getUserById, updateUser };
+async function createAdmin({ username, password }) {
+  const response = await fetchWithToken(`${BASE_URL}/admins`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (
+    result.messages === "error create admin, maybe username already exist" ||
+    result.messages === "username or password is empty"
+  ) {
+    return { error: true, messages: result.messages };
+  }
+
+  return { error: false, messages: result.messages };
+}
+
+export {
+  putAccessToken,
+  downloadTemplate,
+  insertExcel,
+  getQrCode,
+  getUserById,
+  updateUser,
+  createAdmin
+};
