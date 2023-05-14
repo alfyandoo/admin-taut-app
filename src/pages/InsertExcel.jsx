@@ -51,6 +51,7 @@ export const InsertExcel = () => {
             <input
               type="file"
               className="border border-blue-800 mb-5 rounded-lg p-3"
+              accept=".xlsx"
               onChange={(event) => onChangeFile(event)}
             />
 
