@@ -82,6 +82,23 @@ async function getUserById(id) {
   return { error: false, data: result.data };
 }
 
+async function getAdminById(id) {
+  const response = await fetchWithToken(`${BASE_URL}/admins/${id}`, {
+    method: "GET",
+  });
+
+  const result = await response.json();
+
+  if (
+    result.message === "Not Found" ||
+    result.messages === "error delete admin, id admin not found"
+  ) {
+    return { error: true, messages: result.messages };
+  }
+
+  return { error: false, data: result.data };
+}
+
 async function updateUser({
   id,
   password,
@@ -157,13 +174,32 @@ async function deleteUser(id) {
   return { error: false, messages: result.messages };
 }
 
+async function deleteAdmin(id) {
+  const response = await fetchWithToken(`${BASE_URL}/admins/${id}`, {
+    method: "DELETE",
+  });
+
+  const result = await response.json();
+
+  if (
+    result.message === "Not Found" ||
+    result.messages === "error delete admin, id admin not found"
+  ) {
+    return { error: true, messages: result.messages };
+  }
+
+  return { error: false, messages: result.messages };
+}
+
 export {
   putAccessToken,
   downloadTemplate,
   insertExcel,
   getQrCode,
   getUserById,
+  getAdminById,
   updateUser,
   createAdmin,
   deleteUser,
+  deleteAdmin,
 };

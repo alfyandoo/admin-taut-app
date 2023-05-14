@@ -4,11 +4,15 @@ import { BASE_URL } from "../api/api";
 import { List } from "../components/ManageAdmin/List";
 import { Loading } from "../components/templates/Loading";
 import { PopUpCreateAdmin } from "../components/ManageAdmin/PopUpCreateAdmin";
+import { PopUpDeleteAdmin } from "../components/ManageAdmin/PopUpDeleteAdmin";
+import { getAdminById } from "../utils/api";
 
 export const ManageAdmin = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [dataOne, setDataOne] = useState(null);
   const [popUpCreateAdmin, setPopUpCreateAdmin] = useState(false);
+  const [popUpDeleteAdmin, setPopUpDeleteAdmin] = useState(false);
 
   useEffect(() => {
     getAllAdmin();
@@ -34,6 +38,15 @@ export const ManageAdmin = () => {
     setLoading(false);
   };
 
+  const hanldeDeleteAdminById = async (id) => {
+    const { data } = await getAdminById(id);
+
+    if (!!data) {
+      setDataOne(data)
+      setPopUpDeleteAdmin(true)
+    }
+  }
+
   return (
     <>
       {loading ? (
@@ -42,6 +55,9 @@ export const ManageAdmin = () => {
         <>
           {popUpCreateAdmin && (
             <PopUpCreateAdmin setPopUpCreateAdmin={setPopUpCreateAdmin} getAllAdmin={getAllAdmin} />
+          )}
+          {popUpDeleteAdmin && (
+            <PopUpDeleteAdmin setPopUpDeleteAdmin={setPopUpDeleteAdmin} getAllAdmin={getAllAdmin} dataOne={dataOne} />
           )}
           <div className="w-full flex">
             <div className="mx-5">
@@ -55,7 +71,7 @@ export const ManageAdmin = () => {
                     Create Admin
                   </button>
                 </div>
-                <List data={data} getAllAdmin={getAllAdmin} />
+                <List data={data} getAllAdmin={getAllAdmin} hanldeDeleteAdminById={hanldeDeleteAdminById} />
               </div>
             </div>
           </div>

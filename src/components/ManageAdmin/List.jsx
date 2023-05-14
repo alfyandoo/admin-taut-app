@@ -2,21 +2,7 @@ import { FaTrash } from "react-icons/fa";
 import { BASE_URL } from "../../api/api";
 import { showFormattedDate } from "../../utils";
 
-export const List = ({ data, getAllAdmin }) => {
-  const deleteUser = async (id) => {
-    try {
-      await fetch(`${BASE_URL}/admins/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token-admin")}`,
-        },
-      });
-      getAllAdmin();
-    } catch (error) {
-      throw new Error(`Error: ${error}`);
-    }
-  };
-
+export const List = ({ data, getAllAdmin, hanldeDeleteAdminById }) => {
   return (
     <div className="my-5 p-0 border border-blue-800 box-border overflow-hidden rounded-xl">
       <table className="box-border table-fixed overflow-auto w-full">
@@ -28,7 +14,9 @@ export const List = ({ data, getAllAdmin }) => {
             <th className="py-3 px-5 h-11 w-[100px] text-center text-xs 2xl:text-sm font-bold">
               Created At
             </th>
-            <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold">Action</th>
+            <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -46,12 +34,14 @@ export const List = ({ data, getAllAdmin }) => {
               </td>
               <td>
                 <div className="flex justify-center">
-                  <button
-                    className="w-10 h-10 flex items-center justify-center rounded-md text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
-                    onClick={() => deleteUser(Number(item.id))}
-                  >
-                    <FaTrash />
-                  </button>
+                  {item.username !== "admin" && (
+                    <button
+                      className="w-10 h-10 flex items-center justify-center rounded-md text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
+                      onClick={() => hanldeDeleteAdminById(Number(item.id))}
+                    >
+                      <FaTrash />
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
