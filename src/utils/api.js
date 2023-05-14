@@ -93,7 +93,6 @@ async function updateUser({
   address,
   about,
 }) {
-  console.log(id, password);
   const response = await fetchWithToken(`${BASE_URL}/admins/users/${id}`, {
     method: "PUT",
     headers: {

@@ -38,7 +38,7 @@ export const ManageUser = () => {
 
   const handleGetUserById = async (id) => {
     const { data } = await getUserById(id);
-    console.log(data, 'tes');
+
     if (data) {
       setDataOne(data);
       setPopUpUpdateUser(true);

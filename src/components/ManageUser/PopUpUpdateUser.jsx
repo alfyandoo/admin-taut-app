@@ -18,7 +18,7 @@ export const PopUpUpdateUser = ({ setPopUpUpdateUser, dataOne }) => {
 
   const handleUpdateUser = async (newUser) => {
     const { error, messages } = await updateUser(newUser);
-    console.log(error, messages, 'tes');
+
     if (error) {
       Swal.fire({
         icon: "error",
