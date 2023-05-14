@@ -143,6 +143,20 @@ async function createAdmin({ username, password }) {
   return { error: false, messages: result.messages };
 }
 
+async function deleteUser(id) {
+  const response = await fetchWithToken(`${BASE_URL}/admins/users/${id}`, {
+    method: "DELETE",
+  });
+
+  const result = await response.json();
+
+  if (result.error) {
+    return { error: true, messages: result.messages };
+  }
+
+  return { error: false, messages: result.messages };
+}
+
 export {
   putAccessToken,
   downloadTemplate,
@@ -150,5 +164,6 @@ export {
   getQrCode,
   getUserById,
   updateUser,
-  createAdmin
+  createAdmin,
+  deleteUser,
 };

@@ -1,11 +1,14 @@
 import { FaEdit, FaQrcode, FaTrash } from "react-icons/fa";
-import { BASE_URL } from "../../api/api";
 import { showFormattedDate } from "../../utils";
 import React, { useState } from "react";
 import { getQrCode } from "../../utils/api";
 import { PopUpQrCode } from "../templates/PopUpQrCode";
 
-export const List = ({ data, getAllUser, handleGetUserById }) => {
+export const List = ({
+  data,
+  handleGetUserById,
+  hanldeGetSectionDeleteById,
+}) => {
   const [showPopUpQrCode, setShowPopUpQrCode] = useState(false);
   const [username, setUsername] = useState(null);
   const [qrCode, setQrCode] = useState(null);
@@ -18,19 +21,6 @@ export const List = ({ data, getAllUser, handleGetUserById }) => {
       const imageUrl = URL.createObjectURL(data);
       setQrCode(imageUrl);
       setShowPopUpQrCode(true);
-    }
-  };
-  const deleteUser = async (id) => {
-    try {
-      await fetch(`${BASE_URL}/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token-admin")}`,
-        },
-      });
-      getAllUser();
-    } catch (error) {
-      throw new Error(`Error: ${error}`);
     }
   };
 
@@ -118,7 +108,9 @@ export const List = ({ data, getAllUser, handleGetUserById }) => {
                   <div className="flex justify-center">
                     <button
                       className="w-10 h-10 flex items-center justify-center rounded-md text-white bg-red-500 hover:bg-gray-500 hover:text-yellow-400"
-                      onClick={() => deleteUser(Number(item.id))}
+                      onClick={() =>
+                        hanldeGetSectionDeleteById(Number(item.id))
+                      }
                     >
                       <FaTrash />
                     </button>
