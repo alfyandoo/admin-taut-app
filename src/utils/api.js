@@ -68,4 +68,46 @@ async function getQrCode(username) {
   return { error: false, data: result };
 }
 
-export { putAccessToken, downloadTemplate, insertExcel, getQrCode };
+async function getUserById(id) {
+  const response = await fetchWithToken(`${BASE_URL}/admins/users/${id}`, {
+    method: "GET",
+  });
+
+  const result = await response.json();
+
+  if (result.error) {
+    return { error: true, message: result.message };
+  }
+
+  return { error: false, data: result.data };
+}
+
+async function updateUser({ id, password, email, name, job, born_date, phone_number, address, about }) {
+  console.log(id, password);
+  const response = await fetchWithToken(`${BASE_URL}/admins/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password,
+      email,
+      name,
+      job,
+      born_date,
+      phone_number,
+      address,
+      about,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (result.error) {
+    return { error: true, messages: result.messages };
+  }
+
+  return { error: false, messages: result.messages };
+}
+
+export { putAccessToken, downloadTemplate, insertExcel, getQrCode, getUserById, updateUser };

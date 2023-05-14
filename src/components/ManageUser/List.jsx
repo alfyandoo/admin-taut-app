@@ -1,11 +1,11 @@
-import { FaQrcode, FaTrash } from "react-icons/fa";
+import { FaEdit, FaQrcode, FaTrash } from "react-icons/fa";
 import { BASE_URL } from "../../api/api";
 import { showFormattedDate } from "../../utils";
 import React, { useState } from "react";
 import { getQrCode } from "../../utils/api";
 import { PopUpQrCode } from "../templates/PopUpQrCode";
 
-export const List = ({ data, getAllUser }) => {
+export const List = ({ data, getAllUser, handleGetUserById }) => {
   const [showPopUpQrCode, setShowPopUpQrCode] = useState(false);
   const [username, setUsername] = useState(null);
   const [qrCode, setQrCode] = useState(null);
@@ -36,7 +36,13 @@ export const List = ({ data, getAllUser }) => {
 
   return (
     <>
-      {showPopUpQrCode && <PopUpQrCode setShowPopUpQrCode={setShowPopUpQrCode} qrcode={qrCode} username={username} />}
+      {showPopUpQrCode && (
+        <PopUpQrCode
+          setShowPopUpQrCode={setShowPopUpQrCode}
+          qrcode={qrCode}
+          username={username}
+        />
+      )}
       <div className="my-5 p-0 border border-blue-800 box-border overflow-hidden rounded-xl">
         <table className="box-border table-fixed overflow-auto w-full">
           <thead className="border-b border-psl-grey-30/30 bg-psl-blue-500 text-blue-800">
@@ -56,7 +62,9 @@ export const List = ({ data, getAllUser }) => {
               <th className="py-3 px-5 h-11 w-[100px] text-center text-xs 2xl:text-sm font-bold">
                 Created At
               </th>
-              <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold">Action</th>
+              <th className="py-3 px-5 h-11 w-[100px] text-xs 2xl:text-sm font-bold">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -97,6 +105,14 @@ export const List = ({ data, getAllUser }) => {
                       }}
                     >
                       <FaQrcode />
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <button
+                      className="w-10 h-10 flex items-center justify-center rounded-md text-white bg-blue-500 hover:bg-gray-500 hover:text-yellow-400"
+                      onClick={() => handleGetUserById(Number(item.id))}
+                    >
+                      <FaEdit />
                     </button>
                   </div>
                   <div className="flex justify-center">

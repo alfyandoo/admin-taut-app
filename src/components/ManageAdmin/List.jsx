@@ -5,7 +5,7 @@ import { showFormattedDate } from "../../utils";
 export const List = ({ data, getAllAdmin }) => {
   const deleteUser = async (id) => {
     try {
-      await fetch(`${BASE_URL}/users/${id}`, {
+      await fetch(`${BASE_URL}/admins/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token-admin")}`,

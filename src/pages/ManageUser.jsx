@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import { BASE_URL } from "../api/api";
 import { List } from "../components/ManageUser/List";
 import { Loading } from "../components/templates/Loading";
+import { getUserById } from "../utils/api";
+import { PopUpUpdateUser } from "../components/ManageUser/PopUpUpdateUser";
 
 export const ManageUser = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [dataOne, setDataOne] = useState(null);
+  const [popUpUpdateUser, setPopUpUpdateUser] = useState(false);
 
   useEffect(() => {
     getAllUser();
@@ -32,20 +36,32 @@ export const ManageUser = () => {
     setLoading(false);
   };
 
+  const handleGetUserById = async (id) => {
+    const { data } = await getUserById(id);
+    console.log(data, 'tes');
+    if (data) {
+      setDataOne(data);
+      setPopUpUpdateUser(true);
+    }
+  };
+
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
-        <div className="w-full flex">
-          <div className="mx-5">
-            <h1 className="text-center font-bold text-4xl mt-4">List User</h1>
-            <div className="mt-20">
-              <h2 className="font-semibold">Total User: {data?.length}</h2>
-              <List data={data} getAllUser={getAllUser} />
+        <>
+          {popUpUpdateUser && <PopUpUpdateUser setPopUpUpdateUser={setPopUpUpdateUser} dataOne={dataOne} />}
+          <div className="w-full flex">
+            <div className="mx-5">
+              <h1 className="text-center font-bold text-4xl mt-4">List User</h1>
+              <div className="mt-20">
+                <h2 className="font-semibold">Total User: {data?.length}</h2>
+                <List data={data} getAllUser={getAllUser} handleGetUserById={handleGetUserById} />
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );
